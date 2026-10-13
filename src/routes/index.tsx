@@ -91,8 +91,7 @@ function Index() {
 
               <Reveal delay={60}>
                 <h1 className="mt-6 text-4xl leading-[1.08] font-extrabold text-navy-foreground sm:text-5xl lg:text-[3.4rem]">
-                  Empowering a<span className="text-gradient-teal block">healthier world</span>
-                  without boundaries
+                  Empowering a<span className="text-gradient-teal block">healthier world no boundaries</span>
                 </h1>
               </Reveal>
 

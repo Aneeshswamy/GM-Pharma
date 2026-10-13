@@ -6,7 +6,7 @@
 
 /*
  * GM Pharma design system.
- * Teal/turquoise brand + deep navy authority, white and pale-blue surfaces.
+ * Violet/purple brand + deep indigo authority, white and pale-violet surfaces.
  * All colors are oklch tokens. Never hardcode colors in components.
  */
 
@@ -62,45 +62,45 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.22 0.035 250);
 
-  /* GM Pharma teal */
-  --primary: oklch(0.63 0.098 193);
-  --primary-foreground: oklch(0.99 0.005 200);
-  --primary-deep: oklch(0.52 0.09 195);
+  /* GM Pharma premium violet */
+  --primary: oklch(0.58 0.18 301);
+  --primary-foreground: oklch(0.99 0.006 300);
+  --primary-deep: oklch(0.48 0.16 295);
 
-  /* Deep navy for trust/authority */
-  --navy: oklch(0.28 0.062 253);
-  --navy-foreground: oklch(0.98 0.005 220);
+  /* Deep indigo/violet for luxury trust/authority */
+  --navy: oklch(0.24 0.11 266);
+  --navy-foreground: oklch(0.98 0.006 270);
 
-  --secondary: oklch(0.968 0.008 220);
-  --secondary-foreground: oklch(0.28 0.062 253);
+  --secondary: oklch(0.968 0.014 275);
+  --secondary-foreground: oklch(0.24 0.11 266);
 
-  --muted: oklch(0.968 0.008 220);
-  --muted-foreground: oklch(0.52 0.022 250);
+  --muted: oklch(0.968 0.014 275);
+  --muted-foreground: oklch(0.5 0.05 280);
 
-  --accent: oklch(0.955 0.018 195);
-  --accent-foreground: oklch(0.36 0.07 210);
+  --accent: oklch(0.955 0.028 305);
+  --accent-foreground: oklch(0.32 0.12 282);
 
-  /* very light blue/grey section background */
-  --surface: oklch(0.977 0.008 220);
+  /* very light violet/grey section background */
+  --surface: oklch(0.978 0.014 282);
 
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0.003 250);
 
   --border: oklch(0.918 0.011 235);
   --input: oklch(0.905 0.013 235);
-  --ring: oklch(0.63 0.098 193);
+  --ring: oklch(0.58 0.18 301);
 
   --gradient-teal: linear-gradient(
     135deg,
-    oklch(0.63 0.098 193) 0%,
-    oklch(0.52 0.09 200) 55%,
-    oklch(0.4 0.077 225) 100%
+    oklch(0.66 0.2 303) 0%,
+    oklch(0.57 0.18 292) 52%,
+    oklch(0.38 0.14 278) 100%
   );
   --gradient-navy: linear-gradient(
     140deg,
-    oklch(0.26 0.06 255) 0%,
-    oklch(0.32 0.07 235) 60%,
-    oklch(0.42 0.078 205) 100%
+    oklch(0.22 0.12 268) 0%,
+    oklch(0.29 0.12 270) 58%,
+    oklch(0.41 0.17 300) 100%
   );
   --gradient-surface: linear-gradient(180deg, oklch(1 0 0) 0%, oklch(0.972 0.011 215) 100%);
 }
@@ -167,14 +167,14 @@
 /* Molecular / scientific background pattern (subtle) */
 @utility pattern-molecule {
   background-image:
-    radial-gradient(circle at 12% 20%, oklch(0.63 0.098 193 / 0.12) 0 2px, transparent 2px),
-    radial-gradient(circle at 38% 62%, oklch(0.63 0.098 193 / 0.1) 0 2px, transparent 2px),
-    radial-gradient(circle at 72% 28%, oklch(0.28 0.062 253 / 0.1) 0 2px, transparent 2px),
-    radial-gradient(circle at 88% 74%, oklch(0.63 0.098 193 / 0.1) 0 2px, transparent 2px),
+    radial-gradient(circle at 12% 20%, oklch(0.58 0.18 301 / 0.12) 0 2px, transparent 2px),
+    radial-gradient(circle at 38% 62%, oklch(0.58 0.18 301 / 0.1) 0 2px, transparent 2px),
+    radial-gradient(circle at 72% 28%, oklch(0.24 0.11 266 / 0.1) 0 2px, transparent 2px),
+    radial-gradient(circle at 88% 74%, oklch(0.58 0.18 301 / 0.1) 0 2px, transparent 2px),
     linear-gradient(
       115deg,
       transparent 49.6%,
-      oklch(0.63 0.098 193 / 0.07) 49.6% 50.2%,
+      oklch(0.58 0.18 301 / 0.07) 49.6% 50.2%,
       transparent 50.2%
     );
   background-size:

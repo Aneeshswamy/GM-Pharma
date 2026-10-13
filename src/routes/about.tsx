@@ -125,7 +125,7 @@ function AboutPage() {
           <div className="mx-auto mt-12 grid max-w-3xl gap-6 sm:grid-cols-2">
             {company.founders.map((founder, index) => (
               <Reveal
-                key={founder}
+                key={founder.name}
                 delay={index * 80}
                 className="card-hover flex items-center gap-4 rounded-2xl border border-border bg-card p-6"
               >
@@ -133,8 +133,10 @@ function AboutPage() {
                   <UserRound className="size-6" />
                 </span>
                 <div>
-                  <p className="font-display text-base font-bold text-navy">{founder}</p>
-                  <p className="text-sm text-muted-foreground">Co-Founder, {company.name}</p>
+                  <p className="font-display text-base font-bold text-navy">{founder.name}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {founder.role}, {company.name}
+                  </p>
                 </div>
               </Reveal>
             ))}
