@@ -37,20 +37,23 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="hidden bg-navy text-navy-foreground lg:block">
+      <div className="gradient-navy hidden text-navy-foreground lg:block">
         <div className="container-page flex h-10 items-center justify-between text-xs">
-          <p className="font-medium tracking-wide text-navy-foreground/85">{company.positioning}</p>
+          <p className="flex items-center gap-2 font-medium tracking-wide text-navy-foreground/85">
+            <span aria-hidden="true" className="size-1.5 rounded-full bg-green" />
+            {company.positioning}
+          </p>
           <div className="flex items-center gap-6">
             <a
               href={`tel:${company.phones[0].replace(/\s/g, "")}`}
-              className="inline-flex items-center gap-2 transition-colors hover:text-primary"
+              className="inline-flex items-center gap-2 transition-colors hover:text-brand-light"
             >
               <Phone className="size-3.5" />
               {company.phones[0]}
             </a>
             <a
               href={`mailto:${company.email}`}
-              className="inline-flex items-center gap-2 transition-colors hover:text-primary"
+              className="inline-flex items-center gap-2 transition-colors hover:text-brand-light"
             >
               <Mail className="size-3.5" />
               {company.email}
@@ -61,7 +64,7 @@ export function Header() {
 
       <div
         className={cn(
-          "border-b border-border/70 bg-background/95 backdrop-blur transition-shadow",
+          "border-b border-border/70 bg-background/90 backdrop-blur-md transition-shadow",
           scrolled && "shadow-header",
         )}
         onMouseLeave={() => setMenu(null)}
@@ -104,7 +107,6 @@ export function Header() {
             onClick={() => setOpen((v) => !v)}
             className="grid size-11 place-items-center rounded-lg border border-border text-navy lg:hidden"
           >
-            {open ? <Menu className="size-5 hidden" /> : null}
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
@@ -148,7 +150,11 @@ export function Header() {
                       ))}
                 </div>
               </div>
-              <div className="rounded-2xl gradient-navy p-6 text-navy-foreground">
+              <div className="relative isolate overflow-hidden rounded-2xl gradient-navy p-6 text-navy-foreground">
+                <div
+                  aria-hidden="true"
+                  className="absolute -right-10 -bottom-10 -z-10 size-40 rounded-full bg-teal/30 blur-2xl"
+                />
                 <p className="font-display text-lg font-bold">
                   {menu === "services"
                     ? "Looking for a manufacturing partner?"

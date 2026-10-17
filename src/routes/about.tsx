@@ -5,8 +5,9 @@ import aboutLab from "@/assets/about-lab.jpg";
 import { PageHero } from "@/components/site/PageHero";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { StatCounter } from "@/components/site/StatCounter";
+import { StatsBand } from "@/components/site/StatsBand";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import {
   collaborationCapabilities,
   collaborationsStatement,
@@ -16,7 +17,6 @@ import {
   coreValues,
   diversityStatement,
   mission,
-  stats,
   trustQuote,
   vision,
   whatWeDo,
@@ -50,28 +50,53 @@ function AboutPage() {
         crumb="About Us"
       />
 
-      <section className="py-16 sm:py-20">
-        <div className="container-page grid items-center gap-12 lg:grid-cols-2">
+      <section className="py-20 sm:py-24">
+        <div className="container-page grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
           <Reveal className="relative">
+            <div
+              aria-hidden="true"
+              className="absolute -top-6 -left-6 hidden size-40 rounded-3xl bg-gradient-to-br from-primary/20 to-teal/25 sm:block"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute -right-6 -bottom-6 hidden size-32 rounded-3xl bg-green/20 sm:block"
+            />
             <img
               src={aboutLab}
-              alt="GM Pharma analytical laboratory with scientists at work"
+              alt="GM Pharma scientist inspecting a sample in a quality-control laboratory"
+              width={1200}
+              height={912}
               loading="lazy"
-              className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lift"
+              decoding="async"
+              className="relative aspect-[4/3] w-full rounded-3xl object-cover shadow-lift"
             />
+            <div className="absolute -bottom-5 left-5 rounded-2xl gradient-teal px-5 py-3 text-primary-foreground shadow-glow">
+              <p className="text-[0.65rem] font-bold tracking-[0.2em] uppercase opacity-85">
+                Established
+              </p>
+              <p className="font-display text-2xl leading-tight font-extrabold">
+                {company.establishedYear}
+              </p>
+            </div>
           </Reveal>
           <div>
-            <Reveal>
-              <p className="flex items-center gap-3 text-xs font-bold tracking-[0.24em] text-primary uppercase">
-                <span aria-hidden="true" className="h-px w-8 bg-primary/60" />
-                Who We Are
-              </p>
-            </Reveal>
-            <div className="mt-6 space-y-4 text-[0.98rem] leading-relaxed text-muted-foreground">
+            <SectionHeading
+              align="left"
+              eyebrow="Who We Are"
+              title={
+                <>
+                  About <span className="text-gradient-brand">GM Pharma</span>
+                </>
+              }
+            />
+            <div className="mt-6 space-y-4 text-base leading-[1.8] text-muted-foreground">
               <p>
-                {company.name} is an emerging Pharmaceutical &amp; Nutraceutical manufacturing
-                company founded by {company.founders.join(" and ")}, who bring extensive experience
-                and expertise in the pharmaceutical formulation domain.
+                {company.name} is an emerging pharmaceutical and nutraceutical manufacturing company
+                founded by{" "}
+                <strong className="font-semibold text-navy">{company.founders[0].name}</strong> and
+                co-founded by{" "}
+                <strong className="font-semibold text-navy">{company.founders[1].name}</strong>, who
+                bring extensive experience and expertise in the pharmaceutical formulation domain.
               </p>
               <p>
                 {company.name} is focused on the development, manufacturing, and commercialization
@@ -105,16 +130,7 @@ function AboutPage() {
       {/* Stats */}
       <section className="py-2">
         <div className="container-page">
-          <Reveal className="grid gap-4 rounded-2xl gradient-teal p-6 shadow-lift sm:grid-cols-3 sm:p-8">
-            {stats.map((stat) => (
-              <StatCounter
-                key={stat.label}
-                value={stat.value}
-                suffix={stat.suffix}
-                label={stat.label}
-              />
-            ))}
-          </Reveal>
+          <StatsBand />
         </div>
       </section>
 
@@ -129,7 +145,7 @@ function AboutPage() {
                 delay={index * 80}
                 className="card-hover flex items-center gap-4 rounded-2xl border border-border bg-card p-6"
               >
-                <span className="grid size-14 shrink-0 place-items-center rounded-full gradient-navy text-navy-foreground">
+                <span className="grid size-14 shrink-0 place-items-center rounded-full gradient-teal text-primary-foreground shadow-glow">
                   <UserRound className="size-6" />
                 </span>
                 <div>
@@ -146,19 +162,22 @@ function AboutPage() {
 
       <section className="bg-surface py-16 sm:py-20">
         <div className="container-page grid gap-6 lg:grid-cols-2">
-          <Reveal className="gradient-navy rounded-2xl p-8 text-navy-foreground">
+          <Reveal className="gradient-navy rounded-3xl p-8 text-navy-foreground shadow-lift sm:p-10">
             <span className="grid size-12 place-items-center rounded-xl bg-primary-foreground/12 ring-1 ring-primary-foreground/25">
               <Eye className="size-5" />
             </span>
             <h2 className="mt-5 font-display text-xl font-bold">Our Vision</h2>
-            <p className="mt-3 text-sm leading-relaxed text-navy-foreground/80">{vision}</p>
+            <p className="mt-3 text-base leading-[1.8] text-navy-foreground/85">{vision}</p>
           </Reveal>
-          <Reveal delay={100} className="gradient-teal rounded-2xl p-8 text-primary-foreground">
+          <Reveal
+            delay={100}
+            className="gradient-teal rounded-3xl p-8 text-primary-foreground shadow-lift sm:p-10"
+          >
             <span className="grid size-12 place-items-center rounded-xl bg-primary-foreground/15 ring-1 ring-primary-foreground/25">
               <Target className="size-5" />
             </span>
             <h2 className="mt-5 font-display text-xl font-bold">Our Mission</h2>
-            <p className="mt-3 text-sm leading-relaxed text-primary-foreground/85">{mission}</p>
+            <p className="mt-3 text-base leading-[1.8] text-primary-foreground/90">{mission}</p>
           </Reveal>
         </div>
       </section>
@@ -178,7 +197,7 @@ function AboutPage() {
           </Reveal>
           <Reveal
             delay={100}
-            className="mx-auto mt-8 max-w-2xl rounded-2xl border border-border bg-surface p-6 text-center"
+            className="mx-auto mt-8 max-w-2xl rounded-2xl border border-border bg-surface-mint p-6 text-center"
           >
             <p className="font-display text-base leading-relaxed text-navy italic">
               "{trustQuote}"
@@ -203,7 +222,7 @@ function AboutPage() {
       </section>
 
       {/* Diversity and Continuous Development */}
-      <section className="bg-surface py-16 sm:py-20">
+      <section className="gradient-wash py-16 sm:py-20">
         <div className="container-page">
           <SectionHeading eyebrow="Our Growth" title="Diversity and Continuous Development" />
           <div className="mx-auto mt-8 max-w-3xl space-y-4">
@@ -225,8 +244,15 @@ function AboutPage() {
               <Reveal
                 key={item.title}
                 delay={index * 70}
-                className="card-hover rounded-2xl border border-border bg-card p-7"
+                className="card-hover relative overflow-hidden rounded-2xl border border-border bg-card p-7 shadow-soft"
               >
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute inset-x-0 top-0 h-1",
+                    index === 0 ? "bg-primary" : "bg-teal",
+                  )}
+                />
                 <h3 className="font-display text-lg font-bold text-navy">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                   {item.description}
@@ -252,7 +278,11 @@ function AboutPage() {
                 delay={index * 70}
                 className="card-hover rounded-2xl border border-border bg-card p-6 shadow-soft"
               >
-                <p className="font-display text-base font-bold text-navy">{item.title}</p>
+                <span
+                  aria-hidden="true"
+                  className="block h-1 w-10 rounded-full bg-gradient-to-r from-primary via-teal to-green"
+                />
+                <p className="mt-4 font-display text-base font-bold text-navy">{item.title}</p>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {item.description}
                 </p>

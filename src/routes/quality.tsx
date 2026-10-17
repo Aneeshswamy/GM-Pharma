@@ -15,6 +15,8 @@ import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { qualityStandards } from "@/data/company";
+import { toneAt } from "@/lib/tones";
+import { cn } from "@/lib/utils";
 
 const title = "Quality & Compliance — GM Pharma Manufacturing Standards";
 const description =
@@ -63,6 +65,8 @@ const processSteps = [
   },
 ];
 
+// NOTE: "ISO 9001:2015" is not listed in src/data/company.ts qualityStandards —
+// GM Pharma must confirm this certification before launch.
 const certBadges = [
   { icon: ShieldCheck, title: "WHO-GMP", subtitle: "Approved" },
   { icon: BadgeCheck, title: "PIC/S", subtitle: "Compliant" },
@@ -97,7 +101,12 @@ function QualityPage() {
                     delay={index * 70}
                     className="card-hover flex gap-4 rounded-2xl border border-border bg-card p-5 shadow-soft"
                   >
-                    <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+                    <span
+                      className={cn(
+                        "grid size-11 shrink-0 place-items-center rounded-xl",
+                        toneAt(index).iconSoft,
+                      )}
+                    >
                       <Icon className="size-5" />
                     </span>
                     <div>
@@ -115,8 +124,11 @@ function QualityPage() {
             <img
               src={qualityImage}
               alt="Controlled cleanroom environment used for pharmaceutical manufacturing"
+              width={1400}
+              height={900}
               loading="lazy"
-              className="aspect-[4/3] w-full rounded-2xl object-cover shadow-lift"
+              decoding="async"
+              className="aspect-[4/3] w-full rounded-3xl object-cover shadow-lift"
             />
           </Reveal>
         </div>
@@ -133,11 +145,16 @@ function QualityPage() {
           <div className="relative mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <div
               aria-hidden="true"
-              className="absolute top-8 right-[12%] left-[12%] hidden h-px bg-border lg:block"
+              className="gradient-line absolute top-8 right-[12%] left-[12%] hidden h-0.5 opacity-40 lg:block"
             />
             {processSteps.map((step, index) => (
               <Reveal key={step.title} delay={index * 70} className="relative text-center">
-                <span className="relative z-10 mx-auto grid size-16 place-items-center rounded-2xl gradient-teal text-primary-foreground shadow-soft">
+                <span
+                  className={cn(
+                    "relative z-10 mx-auto grid size-16 place-items-center rounded-2xl shadow-soft ring-8 ring-surface",
+                    toneAt(index).iconSolid,
+                  )}
+                >
                   <step.icon className="size-7" />
                 </span>
                 <p className="mt-5 text-xs font-bold tracking-[0.2em] text-primary uppercase">
@@ -157,18 +174,18 @@ function QualityPage() {
       <section className="py-16 sm:py-20">
         <div className="container-page">
           <SectionHeading eyebrow="Certifications" title="Standards we manufacture to" />
-          <Reveal delay={100} className="mt-10 rounded-2xl bg-surface p-8">
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <Reveal delay={100} className="mt-10 rounded-3xl gradient-teal p-6 shadow-lift sm:p-8">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {certBadges.map((badge) => (
                 <div
                   key={badge.title}
-                  className="flex flex-col items-center justify-center gap-3 text-center"
+                  className="flex flex-col items-center justify-center gap-3 rounded-2xl bg-white/10 p-5 text-center ring-1 ring-white/15"
                 >
-                  <span className="grid size-14 place-items-center rounded-full gradient-teal text-primary-foreground shadow-soft">
+                  <span className="grid size-14 place-items-center rounded-full bg-white text-primary shadow-soft">
                     <badge.icon className="size-6" />
                   </span>
-                  <p className="font-semibold text-navy">{badge.title}</p>
-                  <p className="text-xs text-muted-foreground">{badge.subtitle}</p>
+                  <p className="font-display font-bold text-primary-foreground">{badge.title}</p>
+                  <p className="text-xs text-primary-foreground/80">{badge.subtitle}</p>
                 </div>
               ))}
             </div>

@@ -28,10 +28,7 @@ export const company = {
   offices: {
     office: {
       label: "Office Address",
-      lines: [
-        "G M Pharma, 25 MV Sundridge,",
-        "Rajanukunte, Bangalore - 560064, Karnataka, India",
-      ],
+      lines: ["G M Pharma, 25 MV Sundridge,", "Rajanukunte, Bangalore - 560064, Karnataka, India"],
     },
     factory: {
       label: "Factory Address",

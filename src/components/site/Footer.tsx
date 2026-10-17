@@ -13,10 +13,17 @@ const iconMap = {
 
 export function Footer() {
   return (
-    <footer className="gradient-navy text-navy-foreground">
-      <div className="container-page grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-5">
+    <footer className="gradient-navy relative overflow-hidden text-navy-foreground">
+      <div aria-hidden="true" className="gradient-line absolute inset-x-0 top-0 h-1" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 -right-40 size-[28rem] rounded-full bg-teal/15 blur-3xl"
+      />
+      <div className="container-page relative grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr_1.4fr]">
         <div className="lg:col-span-1">
-          <Logo />
+          <div className="inline-flex rounded-2xl bg-white px-4 py-3 shadow-soft">
+            <Logo />
+          </div>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-navy-foreground/75">
             {company.shortDescription}
           </p>
@@ -30,7 +37,7 @@ export function Footer() {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label={item.label}
-                  className="grid size-9 place-items-center rounded-lg border border-navy-foreground/25 text-navy-foreground/85 transition-colors hover:border-primary hover:text-primary"
+                  className="grid size-10 place-items-center rounded-xl border border-white/20 bg-white/5 text-navy-foreground/85 transition-all hover:-translate-y-0.5 hover:border-brand-light hover:bg-white/10 hover:text-brand-light"
                 >
                   <Icon className="size-4" />
                 </a>
@@ -45,7 +52,7 @@ export function Footer() {
               key={category.slug}
               to="/products/$category"
               params={{ category: category.slug }}
-              className="block py-1 text-sm text-navy-foreground/75 transition-colors hover:text-primary"
+              className="block py-1 text-sm text-navy-foreground/75 transition-colors hover:text-brand-light"
             >
               {category.name}
             </Link>
@@ -66,7 +73,7 @@ export function Footer() {
               key={service.slug}
               to="/services/$slug"
               params={{ slug: service.slug }}
-              className="block py-1 text-sm text-navy-foreground/75 transition-colors hover:text-primary"
+              className="block py-1 text-sm text-navy-foreground/75 transition-colors hover:text-brand-light"
             >
               {service.name}
             </Link>
@@ -75,55 +82,55 @@ export function Footer() {
 
         <FooterColumn title="Contact Us">
           <p className="flex gap-3 py-1 text-sm text-navy-foreground/75">
-            <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
+            <MapPin className="mt-0.5 size-4 shrink-0 text-brand-light" />
             <span>{company.offices.office.lines.join(" ")}</span>
           </p>
           <p className="flex gap-3 py-1 text-sm text-navy-foreground/75">
-            <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
+            <MapPin className="mt-0.5 size-4 shrink-0 text-brand-light" />
             <span>Factory: {company.offices.factory.lines.join(" ")}</span>
           </p>
           <p className="flex gap-3 py-1 text-sm text-navy-foreground/75">
-            <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
+            <MapPin className="mt-0.5 size-4 shrink-0 text-brand-light" />
             <span>US: {company.offices.us.lines.join(" ")}</span>
           </p>
           {company.phones.map((phone) => (
             <a
               key={phone}
               href={`tel:${phone.replace(/[\s-]/g, "")}`}
-              className="flex items-center gap-3 py-1 text-sm text-navy-foreground/75 transition-colors hover:text-primary"
+              className="flex items-center gap-3 py-1 text-sm text-navy-foreground/75 transition-colors hover:text-brand-light"
             >
-              <Phone className="size-4 shrink-0 text-primary" />
+              <Phone className="size-4 shrink-0 text-brand-light" />
               {phone}
             </a>
           ))}
           <a
             href={`mailto:${company.email}`}
-            className="flex items-center gap-3 py-1 text-sm text-navy-foreground/75 transition-colors hover:text-primary"
+            className="flex items-center gap-3 py-1 text-sm text-navy-foreground/75 transition-colors hover:text-brand-light"
           >
-            <Mail className="size-4 shrink-0 text-primary" />
+            <Mail className="size-4 shrink-0 text-brand-light" />
             {company.email}
           </a>
           <a
             href={whatsappLink}
             target="_blank"
             rel="noreferrer noopener"
-            className="mt-2 inline-block text-sm font-semibold text-primary underline underline-offset-4"
+            className="mt-3 inline-flex items-center gap-2 rounded-full bg-green px-4 py-2 text-sm font-semibold text-navy transition-transform hover:-translate-y-0.5"
           >
             Chat on WhatsApp
           </a>
         </FooterColumn>
       </div>
 
-      <div className="border-t border-navy-foreground/15">
+      <div className="relative border-t border-white/10">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-5 text-xs text-navy-foreground/65 sm:flex-row">
           <p>
             © {new Date().getFullYear()} {company.legalName}. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link to="/privacy-policy" className="transition-colors hover:text-primary">
+            <Link to="/privacy-policy" className="transition-colors hover:text-brand-light">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="transition-colors hover:text-primary">
+            <Link to="/terms" className="transition-colors hover:text-brand-light">
               Terms &amp; Conditions
             </Link>
           </div>
@@ -136,7 +143,11 @@ export function Footer() {
 function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="font-display text-xs font-bold tracking-[0.2em] text-navy-foreground uppercase">
+      <p className="flex items-center gap-2 font-display text-xs font-bold tracking-[0.2em] text-navy-foreground uppercase">
+        <span
+          aria-hidden="true"
+          className="h-0.5 w-5 rounded-full bg-gradient-to-r from-teal to-green"
+        />
         {title}
       </p>
       <div className="mt-4 space-y-0.5">{children}</div>
@@ -149,7 +160,7 @@ function FooterLink({ to, children }: { to: string; children: React.ReactNode })
     <Link
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       to={to as any}
-      className="block py-1 text-sm text-navy-foreground/75 transition-colors hover:text-primary"
+      className="block py-1 text-sm text-navy-foreground/75 transition-colors hover:text-brand-light"
     >
       {children}
     </Link>

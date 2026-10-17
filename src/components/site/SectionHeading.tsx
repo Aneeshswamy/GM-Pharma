@@ -24,21 +24,22 @@ export function SectionHeading({
       {eyebrow ? (
         <p
           className={cn(
-            "flex items-center gap-3 text-xs font-bold tracking-[0.24em] uppercase",
-            align === "center" && "justify-center",
-            onDark ? "text-primary-foreground/80" : "text-primary",
+            "eyebrow-chip",
+            onDark
+              ? "bg-white/10 text-brand-light ring-1 ring-white/20"
+              : "bg-accent text-primary ring-1 ring-primary/15",
           )}
         >
           <span
             aria-hidden="true"
-            className={cn("h-px w-8", onDark ? "bg-primary-foreground/50" : "bg-primary/60")}
+            className="size-1.5 rounded-full bg-gradient-to-r from-teal to-green"
           />
           {eyebrow}
         </p>
       ) : null}
       <Tag
         className={cn(
-          "mt-4 text-3xl leading-tight font-extrabold sm:text-4xl lg:text-[2.6rem]",
+          "mt-5 text-[1.9rem] leading-[1.15] font-extrabold sm:text-4xl lg:text-[2.6rem]",
           onDark ? "text-primary-foreground" : "text-navy",
         )}
       >
@@ -47,7 +48,8 @@ export function SectionHeading({
       {description ? (
         <p
           className={cn(
-            "mt-5 text-base leading-relaxed sm:text-[1.05rem]",
+            "mt-5 text-base leading-[1.75] sm:text-[1.075rem]",
+            align === "center" && "mx-auto max-w-2xl",
             onDark ? "text-primary-foreground/80" : "text-muted-foreground",
           )}
         >

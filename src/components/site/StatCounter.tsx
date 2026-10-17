@@ -1,26 +1,44 @@
 import { useEffect, useState } from "react";
-import { useInView } from "./Reveal";
+import type { LucideIcon } from "lucide-react";
 
+import { useInView } from "./Reveal";
+import { cn } from "@/lib/utils";
+import { toneAt } from "@/lib/tones";
+
+/**
+ * Animated statistic. The number is rendered exactly once: the server (and
+ * no-JS / text-only readers) get the final value, and the client counts up
+ * from zero the first time the card scrolls into view.
+ */
 export function StatCounter({
   value,
   suffix = "",
   label,
+  icon: Icon,
+  toneIndex = 0,
+  countUp = true,
 }: {
   value: number;
   suffix?: string;
   label: string;
+  icon?: LucideIcon;
+  toneIndex?: number;
+  countUp?: boolean;
 }) {
   const { ref, inView } = useInView<HTMLDivElement>({ threshold: 0.4 });
   const [display, setDisplay] = useState(value);
-  const [animate, setAnimate] = useState(false);
+  const [armed, setArmed] = useState(false);
+  const tone = toneAt(toneIndex);
 
   useEffect(() => {
-    setAnimate(true);
+    if (!countUp) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    setArmed(true);
     setDisplay(0);
-  }, []);
+  }, [countUp]);
 
   useEffect(() => {
-    if (!animate || !inView) return;
+    if (!armed || !inView) return;
     const duration = 1500;
     const start = performance.now();
     let frame = 0;
@@ -34,26 +52,27 @@ export function StatCounter({
 
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [animate, inView, value]);
+  }, [armed, inView, value]);
 
   return (
-    <div
-      ref={ref}
-      className="rounded-xl border border-primary-foreground/20 bg-primary-foreground/10 px-6 py-7 text-center backdrop-blur-sm"
-    >
-      <p className="font-display text-4xl font-extrabold text-primary-foreground sm:text-5xl">
-        <span aria-hidden="true">
+    <div ref={ref} className="flex items-center gap-4 px-2 py-3 sm:px-4">
+      {Icon ? (
+        <span
+          className={cn(
+            "grid size-12 shrink-0 place-items-center rounded-2xl shadow-soft sm:size-14",
+            tone.iconSolid,
+          )}
+        >
+          <Icon className="size-6" />
+        </span>
+      ) : null}
+      <div className="min-w-0">
+        <p className="font-display text-3xl leading-none font-extrabold text-navy tabular-nums sm:text-4xl">
           {display}
           {suffix}
-        </span>
-        <span className="sr-only">
-          {value}
-          {suffix}
-        </span>
-      </p>
-      <p className="mt-2 text-sm font-medium tracking-wide text-primary-foreground/85 sm:text-base">
-        {label}
-      </p>
+        </p>
+        <p className="mt-1.5 text-sm font-semibold tracking-wide text-muted-foreground">{label}</p>
+      </div>
     </div>
   );
 }
